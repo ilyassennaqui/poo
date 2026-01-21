@@ -23,7 +23,7 @@ def nouveau():
   r.set("")
   E1.focus() #mettre le curseur sur widget E1
 def addition():
-  motif=r"^\d+\.\d$"
+  motif=r"^\d+\.?\d$"
   ver1=re.search(motif,a.get())
   ver2=re.search(motif,b.get())
   if ver1==None:
@@ -54,7 +54,7 @@ E1= Entry(win, bg="#020617", fg="#f8fafc", textvariable=a)
 E1.place(x=220, y=70)
 E2= Entry(win, bg="#020617", fg="#f8fafc", textvariable=b)
 E2.place(x=220, y=105)
-E3= Entry(win, bg="#020617", fg="#f8fafc", textvariable=r)
+E3= Entry(win, bg="#020617", fg="#f8fafc", textvariable=r,justify=CENTER,state="readonly")
 E3.place(x=220, y=255)
 win.mainloop() #pour faire apparaitre notre fenetre
 #comment declarer un variable ?

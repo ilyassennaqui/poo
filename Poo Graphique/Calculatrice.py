@@ -1,5 +1,7 @@
 #Tkinter est une bibliotheque qui permet de generer (creer) une interface graphique utilisateur GUI
 from tkinter import *
+from tkinter import messagebox
+import re
 win=Tk()
 #Tk est la classe qui contient tout ce qu'il faut pour engendrer une fenetre et la personnaliser (titre, taille, couleur,...)
 #definir un titre pour notre fenetre
@@ -20,14 +22,33 @@ def nouveau():
   b.set("") 
   r.set("")
   E1.focus() #mettre le curseur sur widget E1
+def addition():
+  motif=r"^\d+\.\d$"
+  ver1=re.search(motif,a.get())
+  ver2=re.search(motif,b.get())
+  if ver1==None:
+    messagebox.showerror("error","Veuillez saisir un nombre ")
+    a.set("")
+    E1.focus()
+  if ver2==None:
+    messagebox.showerror("Error","Veuillez saisir un nombre ")
+    b.set("")
+    E2.focus()
+  n1=float(a.get())#convertir la le contenue du variable en string
+  n2=float(b.get())#convertir la le contenue du variable en string
+  r.set(f"{n1+n2:.2f}")#met le resultat 
+def quitter():
+  rep=messagebox.askyesno("Quitter" ,"Voulez-vous vraiment quitter l'application")
+  if rep :
+    win.destroy() #permet de quitter l'application
 #Labels
 Label(win, text="Simple Calculatrice", font=('Segoe UI', 12, 'bold'), fg='cyan', bg='#0f172a').place(x=170, y=10)
 Label(win, text="Nombre 1: ", font=('Segoe UI', 11, 'bold'), fg='white', bg="#0f172a").place(x=80, y=65)
 Label(win, text="Nombre 2: ", font=('Segoe UI', 11, 'bold'), fg='white', bg="#0f172a").place(x=80, y=100)
 Label(win, text="Resultat: ", font=('Segoe UI', 11, 'bold'), fg='white', bg="#0f172a").place(x=80, y=250)
 Button(win, text="Nouveau", font=('Segoe UI', 12, 'bold'), bg="#475569", fg="#f8fafc", command=nouveau).place(x=100, y=170)
-Button(win, text="Calculer", font=('Segoe UI', 12, 'bold'), bg="#2563eb", fg="#f8fafc").place(x=230, y=170)
-Button(win, text="Quitter", font=('Segoe UI', 12, 'bold'), bg="#dc2626", fg="#f8fafc").place(x=350, y=170)
+Button(win, text="Calculer", font=('Segoe UI', 12, 'bold'), bg="#2563eb", fg="#f8fafc",command=addition).place(x=230, y=170)
+Button(win, text="Quitter", font=('Segoe UI', 12, 'bold'), bg="#dc2626", fg="#f8fafc" ,command=quitter ).place(x=350, y=170)
 #lier le widget E1 a la var a via l'attribut: textvariable
 E1= Entry(win, bg="#020617", fg="#f8fafc", textvariable=a)
 E1.place(x=220, y=70)
@@ -48,90 +69,3 @@ win.mainloop() #pour faire apparaitre notre fenetre
 #la classe StringVar() possede 2 methodes importantes:
 # a) nomVar.get(): pour recuperer la valeur du variable nomVar
 # b) nomVar.set(new): pour modifier la valeur du variable nomVar
-# c)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''#tkinter est une bibliotheque qui permet de generer (creer) une interface graphique
-#Utilisateur GUI
-from tkinter import *
-win=Tk()
-#TK est la classe qui contient tout ce q'il faut engendre une fenetre et la personnalise
-#(titre,couleur,...)
-#definir un titre pour notre fenetre 
-win.title("Mon App")#exemple : Mon app
-win.geometry("500x400")#pour definir la taille de la fenetre geometry ("width x height")
-#Empecher l'utilisateur de redimensionner (augmenter ou reduire la taille de notre fenetre )
-win.resizable(False,False)
-#Pour mettre une icone pour notre fenetre
-win.iconbitmap() #et on met le chemin entre les parenthese
-#une couleur background pour notre fenetre
-win.config(bg="black")
-a=StringVar()#pour le 1 nombre
-b=StringVar()#pour le 2 nombre
-c=StringVar()#pour la resultat
-L=Label(win,text="Simple Calculatrice",font=("tahoma",12,"bold"),fg="green",bg="yellow")
-L.place(x=80,y=10)
-Label(win,text="Nombre 1 :",font=("tahoma",12,"bold"),fg="white",bg="black").place(x=10,y=50)
-Label(win,text="Nombre 2 :",font=("tahoma",12,"bold"),fg="white",bg="black").place(x=10,y=90)
-Label(win, text="Resultat: ", font=('Segoe UI', 11, 'bold'), fg='white', bg="#0f172a").place(x=80, y=250)
-Button(win, text="Nouveau", font=('Segoe UI', 12, 'bold'), bg="#475569", fg="#f8fafc").place(x=100, y=170)
-Button(win, text="Calculer", font=('Segoe UI', 12, 'bold'), bg="#2563eb", fg="#f8fafc").place(x=230, y=170)
-Button(win, text="Quitter", font=('Segoe UI', 12, 'bold'), bg="#dc2626", fg="#f8fafc").place(x=350, y=170)
-#lier le widget E1 a la var a via l'attribut textvariable
-E1=Entry(win,textvariable=a)
-E1.place(x=150,y=55)
-E2= Entry(win, bg="#020617", fg="#f8fafc")
-E2.place(x=220, y=105)
-E3= Entry(win, bg="#020617", fg="#f8fafc")
-E3.place(x=220, y=255)
-
-win.mainloop()#pour faire apparaitre la fenetre
-#comment declarer les variables?
-#strinvar est une classe de tkinter qui est utilisee pour creer et manipuler des variables de chaines de caracztere 
-#dans une interface graphique
-#elle permet de lier dynamiquement une  variable de chaine de caractere à un widget , de sorte que toute modification de la variable sera automatiquement 
-#refletee dans le widget et vice versa
-#Syntaxe deb declaration :
-#          NomVar=StringVar()
-#la classe StringVar() possède 2 methodes important
-# a) nomVar.get():pour recuperer la valeur du variable nomVar
-# b) nomVar.set():pour modifier la valeur du variable nomVar'''

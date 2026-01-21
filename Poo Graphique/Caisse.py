@@ -31,24 +31,24 @@ def calculer():
     if ver==None:
         messagebox.showwarning("Attention?","Veuillez saisir un nombre")
     else:
-        n=int(a.get())
+        n=float(a.get())
         if n>1000 and n<=3000:
             r=n*0.05#prix de remise
             p=n-r
-            b.set(f"{r} DHS")
-            c.set(f"{p} DHS")
+            b.set(f"{r:.2f} DHS")
+            c.set(f"{p:.2f} DHS")
         elif n>3000 and n<=5000:
             r=n*0.07#prix de remise
             p=n-r
-            b.set(f"{r} DHS")
-            c.set(f"{p} DHS")
+            b.set(f"{r:.2f} DHS")
+            c.set(f"{p:.2f} DHS")
         elif n<1000:
             messagebox.showinfo("NOtification","Tu dois depasser 1000DH ")
         else:
             r=n*0.1#prix de remise
             p=n-r
-            b.set(f"{r} DHS")
-            c.set(f"{p} DHS")
+            b.set(f"{r:.2f} DHS")
+            c.set(f"{p:.2f} DHS")
 def quitter():
     rep=messagebox.askyesno("Quitter","Voulez-vous vraiment quitter")
     if rep:
@@ -56,7 +56,7 @@ def quitter():
         
 
 Label(mt, text="Montant Achat :", font=('Segoe UI', 12, 'bold'), bg="#5E6A7B", fg='black').place(x=30, y=70)
-E1= Entry(mt, bg="#FCFCFC", fg="#000000", textvariable=a)
+E1= Entry(mt, bg="#FCFCFC", fg="#000000", textvariable=a,justify=CENTER)
 E1.place(x=210, y=73,width=190,height=30)
 
 Button(mt, text="Nouveau", font=('Segoe UI', 12, 'bold'), bg="#2B2F34", fg="#ffffff", command=nouveau).place(x=50, y=130,width=130,height=45)

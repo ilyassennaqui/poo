@@ -69,6 +69,7 @@ Label(win, text="Resultat: ", font=('Segoe UI', 11, 'bold'), fg='white', bg="#0f
 operation=["add","sous","mult","div"]
 cbo=ttk.Combobox(win,values=operation, textvariable=op, state="readonly")
 cbo.place(x=320,y=160)
+cbo.current()
 Button(win, text="Nouveau", font=('Segoe UI', 12, 'bold'), bg="#475569", fg="#f8fafc", command=nouveau).place(x=100, y=200)
 Button(win, text="Calculer", font=('Segoe UI', 12, 'bold'), bg="#2563eb", fg="#f8fafc",command=calculer).place(x=230, y=200)
 Button(win, text="Quitter", font=('Segoe UI', 12, 'bold'), bg="#dc2626", fg="#000000" ,command=quitter ).place(x=350, y=200)
